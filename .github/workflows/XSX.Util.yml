@@ -44,7 +44,7 @@ jobs:
         dotnet-version: 3.1.101
     - name: Publish
       run: |       
-        version=`1.0.1`
+        version=1.0.1
         dotnet build --configuration Release
         dotnet pack XSX.Util.Extension --configuration release -p:PackageVersion=$version
       env:
