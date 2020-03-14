@@ -1,10 +1,6 @@
 name: XSX.Util
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [create]
 
 jobs:
   test:
