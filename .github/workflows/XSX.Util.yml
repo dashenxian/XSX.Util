@@ -1,0 +1,45 @@
+name: XSX.Util
+
+on: [create]
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Test
+      run: dotnet test --configuration Release
+  
+  build:
+    needs: test
+    name: Build Project
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Build
+      run: dotnet build --configuration Release
+  
+  publish:
+    needs: [test, build]
+    name: Publish Project to Nuget
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Publish
+      run: |
+        version=`git describe --tags`
+        dotnet pack --configuration release -p:PackageVersion=$version
+        dotnet nuget push XSX.Util/XSX.Util.Extension/bin/release/XSX.Util.Extension.$version.nupkg -k ${APIKEY} -s https://www.nuget.org/api/v3/package
+      env:
+        APIKEY: ${{ secrets.nuget_XSX_Util }}
