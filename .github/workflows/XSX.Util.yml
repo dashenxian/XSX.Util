@@ -43,10 +43,8 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Publish
-      run: |
-        version=`1.0.1`
+      run: |       
         dotnet build --configuration Release
-        dotnet pack XSX.Util.Extension --configuration release -p:PackageVersion=$version
-        dotnet nuget push XSX.Util.Extension/bin/release/XSX.Util.Extension.*.nupkg -k ${APIKEY} -s https://www.nuget.org/api/v3/package
+        dotnet pack XSX.Util.Extension --configuration release -p:PackageVersion=1.0.1
       env:
         APIKEY: ${{ secrets.nuget_XSX_Util }}
