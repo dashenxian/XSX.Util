@@ -41,13 +41,18 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Publish
+    - name: Publish-Extension
       run: |       
         version=`git describe --tags`
         dotnet build --configuration Release
         dotnet pack XSX.Util.Extension --configuration release -p:PackageVersion=$version
         dotnet nuget push XSX.Util.Extension/bin/release/XSX.Util.Extension.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
-
+      env:
+        APIKEY: ${{ secrets.nuget_XSX_Util }}
+    - name: Publish-Helper
+      run: |       
+        version=`git describe --tags`
+        dotnet build --configuration Release
         dotnet pack XSX.Util.Helper --configuration release -p:PackageVersion=$version
         dotnet nuget push XSX.Util.Helper/bin/release/XSX.Util.Helper.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
       env:
