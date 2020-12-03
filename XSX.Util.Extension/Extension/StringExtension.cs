@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace XSX.Util.Extension
@@ -87,5 +88,23 @@ namespace XSX.Util.Extension
             return ss + str;
         }
 
+
+        public static string EncryptMD5(this string input)
+        {
+            using MD5CryptoServiceProvider cryptoServiceProvider = new MD5CryptoServiceProvider();
+            return BitConverter.ToString(cryptoServiceProvider.ComputeHash(Encoding.UTF8.GetBytes(input))).Replace("-", string.Empty).ToLower();
+        }
+
+        public static string EncryptShortMD5(this string input)
+        {
+            return input.EncryptMD5().Substring(8, 16);
+        }
+
+        public static bool ValidateMD5(this string input, string encryptedValue)
+        {
+            if (string.IsNullOrEmpty(input))
+                return false;
+            return encryptedValue.Length == 16 ? input.EncryptShortMD5().Equals(encryptedValue) : input.EncryptMD5().Equals(encryptedValue);
+        }
     }
 }
