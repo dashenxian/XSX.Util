@@ -1,6 +1,8 @@
 name: XSX.Util
 
-on: [create]
+on: 
+  push:
+    tags: v*
   workflow_dispatch: # 手动触发
 
 jobs:
