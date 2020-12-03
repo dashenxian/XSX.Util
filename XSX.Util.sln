@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSX.Util.Extension", "XSX.Util.Extension\XSX.Util.Extension.csproj", "{6F116F90-C314-449A-A2F1-B15AC0F6AF7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSX.Util.Extension", "XSX.Util.Extension\XSX.Util.Extension.csproj", "{6F116F90-C314-449A-A2F1-B15AC0F6AF7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSX.Util.Helper", "XSX.Util.Helper\XSX.Util.Helper.csproj", "{CA3801EB-1517-45D7-9060-26E8A5AF4915}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6F116F90-C314-449A-A2F1-B15AC0F6AF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F116F90-C314-449A-A2F1-B15AC0F6AF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F116F90-C314-449A-A2F1-B15AC0F6AF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA3801EB-1517-45D7-9060-26E8A5AF4915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA3801EB-1517-45D7-9060-26E8A5AF4915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA3801EB-1517-45D7-9060-26E8A5AF4915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA3801EB-1517-45D7-9060-26E8A5AF4915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
