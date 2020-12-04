@@ -8,6 +8,13 @@ namespace XSX.Util.Extension
     public static class StringExtension
     {
         /// <summary>
+        /// 是否为空或空白字符串
+        /// </summary>
+        public static bool IsNullOrWhiteSpace(this string str)
+        {
+            return string.IsNullOrWhiteSpace(str);
+        }
+        /// <summary>
         /// 是否非空
         /// </summary>
         /// <param name="val"></param>

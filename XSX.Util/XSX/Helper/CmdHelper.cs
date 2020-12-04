@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace XSX.Util.Helper
+namespace XSX.Helper
 {
     public static class CmdHelper
     {
