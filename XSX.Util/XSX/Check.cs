@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using XSX.Extension.Collections;
 using XSX.Util.Extension;
 
 namespace XSX
