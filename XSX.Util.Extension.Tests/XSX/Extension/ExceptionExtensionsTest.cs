@@ -7,7 +7,7 @@ using Shouldly;
 using XSX.Extension;
 using Xunit;
 
-namespace XSX.Util.Tests
+namespace Tests.XSX.Extension
 {
 
     public class ExceptionExtensionsTest

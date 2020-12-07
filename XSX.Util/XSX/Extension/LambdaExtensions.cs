@@ -6,7 +6,7 @@ using System.Text;
 
 namespace XSX.Extension
 {
-    public static class LambdaExtension
+    public static class LambdaExtensions
     {
         public static Expression<Func<T, bool>> True<T>() { return param => true; }
         public static Expression<Func<T, bool>> False<T>() { return param => false; }
