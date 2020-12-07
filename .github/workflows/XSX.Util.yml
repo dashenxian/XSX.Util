@@ -48,5 +48,8 @@ jobs:
         dotnet pack XSX.Util --configuration release -p:PackageVersion=$version 
         dotnet nuget push XSX.Util/bin/release/XSX.Util.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
 
+        dotnet pack XSX.Util.TestBase --configuration release -p:PackageVersion=$version 
+        dotnet nuget push XSX.Util.TestBase/bin/release/XSX.Util.TestBase.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
+
       env:
         APIKEY: ${{ secrets.nuget_XSX_Util }}
