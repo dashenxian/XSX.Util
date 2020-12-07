@@ -8,13 +8,6 @@ namespace XSX.Extension
     public static class StringExtension
     {
         /// <summary>
-        /// 是否为空或空白字符串
-        /// </summary>
-        public static bool IsNullOrWhiteSpace(this string str)
-        {
-            return string.IsNullOrWhiteSpace(str);
-        }
-        /// <summary>
         /// 是否非空
         /// </summary>
         /// <param name="val"></param>
@@ -31,6 +24,13 @@ namespace XSX.Extension
         public static bool IsNullOrEmpty(this string val)
         {
             return string.IsNullOrEmpty(val);
+        }
+        /// <summary>
+        /// 是否为空或空白字符串
+        /// </summary>
+        public static bool IsNullOrWhiteSpace(this string str)
+        {
+            return string.IsNullOrWhiteSpace(str);
         }
         /// <summary>
         /// 确保字符串结束位置有指定的字符，如果没有就添加指定的字符到结束的位置，如果有则直接返回
@@ -95,6 +95,13 @@ namespace XSX.Extension
             return ss + str;
         }
 
+        /// <summary>
+        /// Converts line endings in the string to <see cref="Environment.NewLine"/>.
+        /// </summary>
+        public static string NormalizeLineEndings(this string str)
+        {
+            return str.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", Environment.NewLine);
+        }
 
         public static string EncryptMD5(this string input)
         {

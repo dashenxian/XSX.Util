@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using XSX.Extension;
 using XSX.Extension.Collections;
-using XSX.Util.Extension;
 
 namespace XSX
 {
