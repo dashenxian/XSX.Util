@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace XSX.Util.Extension
+namespace XSX.Extension
 {
     public static class StringExtension
     {

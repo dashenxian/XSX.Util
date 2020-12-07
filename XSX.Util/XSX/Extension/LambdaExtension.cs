@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace XSX.Util.Extension
+namespace XSX.Extension
 {
     public static class LambdaExtension
     {

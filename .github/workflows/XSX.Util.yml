@@ -45,7 +45,7 @@ jobs:
       run: |       
         version=`git describe --tags`
         dotnet build --configuration Release
-        dotnet pack XSX.Util --configuration release -p:PackageVersion=$version
+        dotnet pack XSX.Util --configuration release -p:PackageVersion=$version 
         dotnet nuget push XSX.Util/bin/release/XSX.Util.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
 
       env:

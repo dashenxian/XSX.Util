@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 
-namespace XSX.Util.Extension
+namespace XSX.Extension
 {
     public static class TypeExtension
     {
