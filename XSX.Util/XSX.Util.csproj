@@ -3,6 +3,9 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<RootNamespace />
+		<Description>XSX.Util，一些辅助帮助类，参考了很多别人的代码</Description>
+		<Authors>小神仙</Authors>
+		<PackageTags>Util;Extension;Helper</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
