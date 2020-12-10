@@ -23,14 +23,14 @@ namespace XSX.Util
         void CompressFiles(IEnumerable<string> files, string zipedFile, bool isGC);
 
         /// <summary>
-        /// zip压缩文件
+        /// 压缩文件
         /// </summary>
         /// <param name="files">要压缩的文件路径列表</param>   
         /// <returns>返回压缩文件内存流</returns>
         MemoryStream CompressFiles(IEnumerable<string> files);
 
         /// <summary>
-        /// zip压缩文件
+        /// 压缩文件
         /// </summary>
         /// <param name="files">要压缩的文件路径列表</param>   
         /// <param name="isGC">压缩完成后是否执行GC操作，压缩大文件时执行gc可以释放一些内存</param>   

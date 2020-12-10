@@ -24,7 +24,7 @@ namespace XSX.Util
         /// <param name="zipedFile">压缩后的文件路径</param>    
         public void CompressFiles(IEnumerable<string> files, string zipedFile)
         {
-            CompressFiles(files, zipedFile, true);
+            CompressFiles(files, zipedFile, false);
         }
 
         /// <summary>   
@@ -99,7 +99,7 @@ namespace XSX.Util
         /// <returns>返回压缩文件内存流</returns>
         public MemoryStream CompressFiles(IEnumerable<string> files)
         {
-            return CompressFiles(files, true);
+            return CompressFiles(files, false);
         }
         /// <summary>
         /// zip压缩文件
