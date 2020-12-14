@@ -17,15 +17,15 @@ namespace XSX.Util
     {
         #region 文件压缩
 
-        /// <summary>   
-        /// 压缩文件   
-        /// </summary>   
-        /// <param name="files">要压缩的文件路径列表</param>   
-        /// <param name="zipedFile">压缩后的文件路径</param>    
-        public void CompressFiles(IEnumerable<string> files, string zipedFile)
-        {
-            CompressFiles(files, zipedFile, false);
-        }
+        ///// <summary>   
+        ///// 压缩文件   
+        ///// </summary>   
+        ///// <param name="files">要压缩的文件路径列表</param>   
+        ///// <param name="zipedFile">压缩后的文件路径</param>    
+        //public void CompressFiles(IEnumerable<string> files, string zipedFile)
+        //{
+        //    CompressFiles(files, zipedFile, false);
+        //}
 
         /// <summary>   
         /// 压缩文件   
@@ -90,6 +90,22 @@ namespace XSX.Util
                     GC.Collect();
                 }
             }
+        }
+
+        /// <summary>   
+        /// 压缩文件   
+        /// </summary>   
+        /// <param name="files">要压缩的文件路径列表</param>   
+        /// <param name="zipedFile">压缩后的文件路径</param>   
+        public void CompressFiles(IEnumerable<string> files, string zipedFile)
+        {
+            using ZipFile zip = ZipFile.Create(zipedFile);
+            zip.BeginUpdate();
+            foreach (string file in files)
+            {
+                zip.Add(file, Path.GetFileName(file));
+            }
+            zip.CommitUpdate();
         }
 
         /// <summary>
