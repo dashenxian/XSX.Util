@@ -2,6 +2,10 @@
 
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace />
+		<Description>XSX.Util.TestBase，单元测试基类，引用了常用的包和添加一些基本的方法</Description>
+		<Authors>小神仙</Authors>
+		<PackageTags>Util;UnitTest;XUnit</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
