@@ -24,7 +24,7 @@ namespace Tests.XSX.Extension
             {
                 reThrowEx = ex;
             }
-            reThrowEx.StackTrace.ShouldContain("End of stack trace from previous location where exception was thrown");
+            reThrowEx.StackTrace.ShouldContain("g__ThrowException|");
 
             void ThrowExceptionReThrow()
             {
