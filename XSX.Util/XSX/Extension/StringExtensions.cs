@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -97,8 +98,23 @@ namespace XSX.Extension
             return ss + str;
         }
         /// <summary>
-        /// Converts line endings in the string to <see cref="Environment.NewLine"/>.
+        /// 转换路径分隔符与当前系统要求的路径分隔符匹配<see cref="Path.DirectorySeparatorChar"/>.
         /// </summary>
+        public static string NormalizeDirectorySeparator(this string str)
+        {
+            return str.Replace('\\',Path.DirectorySeparatorChar)
+                .Replace('/', Path.DirectorySeparatorChar);
+        }
+        /// <summary>
+        /// 转换路径分隔符'\'为url分隔符'/'
+        /// </summary>
+        public static string NormalizeUrlSeparator(this string str)
+        {
+            return str.Replace('\\', '/');
+        }
+        /// <summary>
+                 /// Converts line endings in the string to <see cref="Environment.NewLine"/>.
+                 /// </summary>
         public static string NormalizeLineEndings(this string str)
         {
             return str.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", Environment.NewLine);
