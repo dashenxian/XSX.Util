@@ -57,6 +57,7 @@ namespace XSX.Util
                         byte[] buffer = new byte[fs.Length];
                         fs.Read(buffer, 0, buffer.Length);
                         ent = new ZipEntry(Path.GetFileName(file));
+                        ent.IsUnicodeText = true;
                         ent.DateTime = DateTime.Now;
                         ent.Size = fs.Length;
 
