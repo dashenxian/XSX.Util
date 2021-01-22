@@ -1,6 +1,4 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
-//using GD.SharpZipLib.Checksums;
-//using GD.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -226,6 +224,9 @@ namespace XSX.Util
                             Directory.CreateDirectory(fileName);
                             continue;
                         }
+                        var filePathDirectory = Path.GetDirectoryName(fileName);
+                        if (!Directory.Exists(filePathDirectory))
+                            Directory.CreateDirectory(filePathDirectory);
 
                         using (var fs = File.Create(fileName))
                         {
