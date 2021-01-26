@@ -34,6 +34,17 @@ namespace XSX.Extension
         public static bool IsNullOrWhiteSpace(this string str)
         {
             return string.IsNullOrWhiteSpace(str);
+        }  
+        /// <summary>
+        /// 确保字符串结束位置有指定的字符，如果没有就添加指定的字符到结束的位置，如果有则直接返回
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <param name="ss">开始位置指定的字符</param>
+        /// <param name="comparisonType">比较方式</param>
+        /// <returns></returns>
+        public static string EnsureEndsWith(this string str, char ss)
+        {
+            return EnsureEndsWith(str, ss+"", StringComparison.Ordinal);
         }
         /// <summary>
         /// 确保字符串结束位置有指定的字符，如果没有就添加指定的字符到结束的位置，如果有则直接返回

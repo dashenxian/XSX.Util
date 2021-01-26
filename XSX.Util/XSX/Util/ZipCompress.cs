@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ICSharpCode.SharpZipLib.Checksum;
+using XSX.Extension;
 
 namespace XSX.Util
 {
@@ -183,7 +184,71 @@ namespace XSX.Util
                 return memoryStream;
             }
         }
+        /// <summary>
+        /// 压缩指定文件夹内的所有文件和文件夹
+        /// </summary>
+        /// <param name="sourceFilePath">要压缩的文件夹路径</param>
+        /// <param name="destinationZipFilePath">压缩文件目标路径</param>
+        public void CreateZip(string sourceFilePath, string destinationZipFilePath)
+        {
+            sourceFilePath = sourceFilePath.EnsureEndsWith(Path.DirectorySeparatorChar);
+            var dir = Path.GetDirectoryName(destinationZipFilePath);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            using (ZipOutputStream zipStream = new ZipOutputStream(File.Create(destinationZipFilePath)))
+            {
+                zipStream.SetLevel(6);
+                CreateZipFiles(sourceFilePath, zipStream, sourceFilePath);
+                zipStream.Finish();
+                zipStream.Close();
+            }
+        }
 
+        /// <summary>
+        /// 递归压缩文件
+        /// </summary>
+        /// <param name="sourceFilePath">待压缩的文件或文件夹路径</param>
+        /// <param name="zipStream">打包结果的zip文件路径（类似 D:\WorkSpace\a.zip）,全路径包括文件名和.zip扩展名</param>
+        /// <param name="staticFile"></param>
+        private static void CreateZipFiles(string sourceFilePath, ZipOutputStream zipStream, string staticFile)
+        {
+            var crc = new Crc32();
+            string[] filesArray = Directory.GetFileSystemEntries(sourceFilePath);
+            foreach (string file in filesArray)
+            {
+                if (Directory.Exists(file))
+                {
+                    //如果当前是文件夹，递归
+                    CreateZipFiles(file, zipStream, staticFile);
+                }
+                else
+                {
+                    //如果是文件，开始压缩
+                    using (var fs = File.OpenRead(file))
+                    {
+                        var buffer = new byte[fs.Length];
+                        fs.Read(buffer, 0, buffer.Length);
+                        crc.Reset();
+                        crc.Update(buffer);
+                        fs.Close();
+
+                        string tempFile = Path.GetFileName(file);
+                        ZipEntry entry = new ZipEntry(tempFile)
+                        {
+                            IsUnicodeText = true,
+                            DateTime = DateTime.Now,
+                            Size = buffer.Length,
+                            Crc = crc.Value
+                        };
+                        zipStream.PutNextEntry(entry);
+
+                        zipStream.Write(buffer, 0, buffer.Length);
+                    }
+                }
+            }
+        }
         #endregion 文件压缩
 
         #region 文件解压
