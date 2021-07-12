@@ -234,7 +234,7 @@ namespace XSX.Util
                         crc.Update(buffer);
                         fs.Close();
 
-                        string tempFile = Path.GetFileName(file);
+                        string tempFile = Path.GetRelativePath(staticFile,file);
                         ZipEntry entry = new ZipEntry(tempFile)
                         {
                             IsUnicodeText = true,
