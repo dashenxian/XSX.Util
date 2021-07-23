@@ -87,5 +87,29 @@ namespace XSX.Extension.Collections
                 expression = Expression.Convert(expression, propertyType.GetEnumUnderlyingType());
             return Expression.Convert(expression, typeof(object));
         }
+        /// <summary>
+        /// 把对象列表用分隔符连接成字符串
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">对象列表</param>
+        /// <param name="separator">分隔符</param>
+        /// <returns></returns>
+        public static string JoinAsString<T>(this IEnumerable<T> source, string separator)
+        {
+            return string.Join(separator, source);
+        }
+
+        /// <summary>
+        /// 把对象列表用分隔符连接成字符串
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">对象列表</param>
+        /// <param name="separator">分隔符</param>
+        /// <param name="package">对象包装符</param>
+        /// <returns></returns>
+        public static string JoinAsString<T>(this IEnumerable<T> source, string separator, string package)
+        {
+            return string.Join(separator, package + source + package);
+        }
     }
 }
