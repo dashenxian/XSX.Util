@@ -7,7 +7,11 @@
 		<Authors>小神仙</Authors>
 		<PackageTags>Util;UnitTest;XUnit</PackageTags>
 	</PropertyGroup>
-
+	<PropertyGroup>
+		<EmbedAllSources>true</EmbedAllSources>
+		<!-- Include symbol files (*.pdb) in the built .nupkg -->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="NSubstitute" Version="4.2.2" />
 		<PackageReference Include="Shouldly" Version="4.0.3" />
