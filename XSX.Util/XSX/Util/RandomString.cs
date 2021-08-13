@@ -93,14 +93,15 @@ namespace XSX.Util
         {
             // 获取GB2312编码页（表）
             Encoding gb = Encoding.GetEncoding("gb2312");
-
+            var utf8 = Encoding.UTF8;
             var bytes = this.CreateRegionCode(strlength);
 
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < strlength; i++)
             {
-                string temp = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+                var tempTytes = System.Text.Encoding.Convert(gb, utf8, (byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+                var temp = utf8.GetString(tempTytes);
                 sb.Append(temp);
             }
 
