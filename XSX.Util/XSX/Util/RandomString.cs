@@ -100,7 +100,7 @@ namespace XSX.Util
 
             for (int i = 0; i < strlength; i++)
             {
-                var tempTytes = System.Text.Encoding.Convert(gb, utf8, (byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+                var tempTytes = Encoding.Convert(gb, utf8, (byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
                 var temp = utf8.GetString(tempTytes);
                 sb.Append(temp);
             }
