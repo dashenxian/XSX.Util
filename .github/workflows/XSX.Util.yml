@@ -1,6 +1,8 @@
 name: XSX.Util
 
-on: [create]
+on: 
+  create:
+  workflow_dispatch: # 手动触发
 
 jobs:
   test:
@@ -34,6 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - run: git fetch --prune --unshallow
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -42,7 +45,11 @@ jobs:
       run: |       
         version=`git describe --tags`
         dotnet build --configuration Release
-        dotnet pack XSX.Util.Extension --configuration release -p:PackageVersion=$version
-        dotnet nuget push XSX.Util.Extension/bin/release/XSX.Util.Extension.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
+        dotnet pack XSX.Util --configuration release -p:PackageVersion=$version 
+        dotnet nuget push XSX.Util/bin/release/XSX.Util.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
+
+        dotnet pack XSX.Util.TestBase --configuration release -p:PackageVersion=$version 
+        dotnet nuget push XSX.Util.TestBase/bin/release/XSX.Util.TestBase.*.nupkg -k ${APIKEY} -s https://api.nuget.org/v3/index.json
+
       env:
         APIKEY: ${{ secrets.nuget_XSX_Util }}

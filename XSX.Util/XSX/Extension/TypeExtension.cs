@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace XSX.Util.Extension
+namespace XSX.Extension
 {
     public static class TypeExtension
     {
@@ -73,7 +74,29 @@ namespace XSX.Util.Extension
             }
             return obj;
         }
-
         #endregion
+        /// <summary>
+        /// 判断类型是否为可操作的列表类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsList(this Type type)
+        {
+            return typeof(System.Collections.IList).IsAssignableFrom(type) || type.GetInterfaces().Any(it => it.IsGenericType && typeof(IList<>) == it.GetGenericTypeDefinition());
+        }
+        /// <summary>
+        /// 判断类型是否为列表类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsEnumerable(this Type type)
+        {
+            if (type.IsArray)
+            {
+                return true;
+            }
+            return typeof(System.Collections.IEnumerable).IsAssignableFrom(type) || type.GetInterfaces().Any(it => it.IsGenericType && typeof(IEnumerable<>) == it.GetGenericTypeDefinition());
+        }
+
     }
 }

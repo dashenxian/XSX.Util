@@ -4,9 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace XSX.Util.Extension
+namespace XSX.Extension
 {
-    public static class LambdaExtension
+    public static class LambdaExtensions
     {
         public static Expression<Func<T, bool>> True<T>() { return param => true; }
         public static Expression<Func<T, bool>> False<T>() { return param => false; }
