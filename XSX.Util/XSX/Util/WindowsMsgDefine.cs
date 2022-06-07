@@ -1029,6 +1029,6 @@ namespace XSX.Util
         public const int WM_CBT_RESERVED__reserved_3fc = 0x3fc;
         public const int WM_CBT_RESERVED__reserved_3fd = 0x3fd;
         public const int WM_CBT_RESERVED__reserved_3fe = 0x3fe;
-        public const int WM_CBT_RESERVED_LAST = 0x3ff
+        public const int WM_CBT_RESERVED_LAST = 0x3ff;
     }
 }
