@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>XiaoShenXian</Authors>
+    <Description>一些通用代码</Description>
+    <PackageProjectUrl>https://github.com/dashenxian/XSX.Util</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dashenxian/XSX.Util</RepositoryUrl>
+    <RepositoryType>c#</RepositoryType>
   </PropertyGroup>
 
 </Project>
