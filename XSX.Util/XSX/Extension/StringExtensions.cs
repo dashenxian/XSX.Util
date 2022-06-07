@@ -396,5 +396,31 @@ namespace XSX.Extension
                 return false;
             return encryptedValue.Length == 16 ? input.EncryptShortMD5().Equals(encryptedValue) : input.EncryptMD5().Equals(encryptedValue);
         }
+
+        /// <summary>
+        /// 字符串掩码
+        /// </summary>
+        /// <param name="s">字符串</param>
+        /// <param name="mask">掩码符</param>
+        /// <returns></returns>
+        public static string Mask(this string s, char mask = '*')
+        {
+            if (string.IsNullOrWhiteSpace(s?.Trim()))
+            {
+                return s;
+            }
+            s = s.Trim();
+            string masks = mask.ToString().PadLeft(4, mask);
+            return s.Length switch
+            {
+                >= 11 => Regex.Replace(s, "(.{3}).*(.{4})", $"$1{masks}$2"),
+                10 => Regex.Replace(s, "(.{3}).*(.{3})", $"$1{masks}$2"),
+                9 => Regex.Replace(s, "(.{2}).*(.{3})", $"$1{masks}$2"),
+                8 => Regex.Replace(s, "(.{2}).*(.{2})", $"$1{masks}$2"),
+                7 => Regex.Replace(s, "(.{1}).*(.{2})", $"$1{masks}$2"),
+                6 => Regex.Replace(s, "(.{1}).*(.{1})", $"$1{masks}$2"),
+                _ => Regex.Replace(s, "(.{1}).*", $"$1{masks}")
+            };
+        }
     }
 }
