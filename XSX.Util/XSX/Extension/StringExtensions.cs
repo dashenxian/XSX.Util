@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 using XSX.Extension.Collections;
 
 namespace XSX.Extension
@@ -15,7 +17,7 @@ namespace XSX.Extension
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static bool IsNotNullAndEmpty(this string val)
+        public static bool IsNotNullAndEmpty([NotNullWhen(true)] [CanBeNull] this string val)
         {
             return !IsNullOrEmpty(val);
         }
@@ -24,7 +26,7 @@ namespace XSX.Extension
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static bool IsNullOrEmpty(this string val)
+        public static bool IsNullOrEmpty([NotNullWhen(false)][CanBeNull] this string val)
         {
             return string.IsNullOrEmpty(val);
         }
