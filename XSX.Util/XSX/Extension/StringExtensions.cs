@@ -17,7 +17,7 @@ namespace XSX.Extension
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static bool IsNotNullAndEmpty([NotNullWhen(true)] [CanBeNull] this string val)
+        public static bool IsNotNullAndEmpty([NotNullWhen(true)][CanBeNull] this string val)
         {
             return !IsNullOrEmpty(val);
         }
@@ -33,10 +33,10 @@ namespace XSX.Extension
         /// <summary>
         /// 是否为空或空白字符串
         /// </summary>
-        public static bool IsNullOrWhiteSpace(this string str)
+        public static bool IsNullOrWhiteSpace([NotNullWhen(false)][CanBeNull] this string str)
         {
             return string.IsNullOrWhiteSpace(str);
-        }  
+        }
         /// <summary>
         /// 确保字符串结束位置有指定的字符，如果没有就添加指定的字符到结束的位置，如果有则直接返回
         /// </summary>
@@ -46,7 +46,7 @@ namespace XSX.Extension
         /// <returns></returns>
         public static string EnsureEndsWith(this string str, char ss)
         {
-            return EnsureEndsWith(str, ss+"", StringComparison.Ordinal);
+            return EnsureEndsWith(str, ss + "", StringComparison.Ordinal);
         }
         /// <summary>
         /// 确保字符串结束位置有指定的字符，如果没有就添加指定的字符到结束的位置，如果有则直接返回
@@ -115,7 +115,7 @@ namespace XSX.Extension
         /// </summary>
         public static string NormalizeDirectorySeparator(this string str)
         {
-            return str.Replace('\\',Path.DirectorySeparatorChar)
+            return str.Replace('\\', Path.DirectorySeparatorChar)
                 .Replace('/', Path.DirectorySeparatorChar);
         }
         /// <summary>
@@ -126,8 +126,8 @@ namespace XSX.Extension
             return str.Replace('\\', '/');
         }
         /// <summary>
-                 /// Converts line endings in the string to <see cref="Environment.NewLine"/>.
-                 /// </summary>
+        /// Converts line endings in the string to <see cref="Environment.NewLine"/>.
+        /// </summary>
         public static string NormalizeLineEndings(this string str)
         {
             return str.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", Environment.NewLine);

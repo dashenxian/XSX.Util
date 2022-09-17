@@ -18,7 +18,33 @@ namespace Tests.XSX.Extension
         {
             _testOutputHelper = testOutputHelper;
         }
+        [Fact]
+        public void IsNotNullAndEmptyTest()
+        {
+            string str = null;
+            var result = str.IsNotNullAndEmpty();
+            result.ShouldBe(false);
+            str = "";
+            result = str.IsNotNullAndEmpty();
+            result.ShouldBe(false);
+            str = " ";
+            result = str.IsNotNullAndEmpty();
+            result.ShouldBe(true);
+        }
 
+        [Fact]
+        public void IsNullOrEmptyTest()
+        {
+            string str = null;
+            var result = str.IsNullOrEmpty();
+            result.ShouldBe(true);
+            str = "";
+            result = str.IsNullOrEmpty();
+            result.ShouldBe(true);
+            str = " ";
+            result = str.IsNullOrEmpty();
+            result.ShouldBe(false);
+        }
         [Fact]
         public void ToSentenceCaseTest()
         {
