@@ -111,5 +111,27 @@ namespace XSX.Extension.Collections
         {
             return string.Join(separator, package + source + package);
         }
+
+        /// <summary>
+        /// 计算列表的全组合列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> GetCombination<T>(this IEnumerable<T> arr)
+        {
+            List<List<T>> list = new List<List<T>>();
+            foreach (var s in arr)
+            {
+                var lst = list.ToList();
+                var nArr = new List<T> { s };
+                list.Add(nArr);
+                foreach (var ss in lst)
+                {
+                    list.Add(ss.Concat(nArr).ToList());
+                }
+            }
+            return list;
+        }
     }
 }
