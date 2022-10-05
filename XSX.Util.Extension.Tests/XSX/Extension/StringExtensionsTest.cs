@@ -57,7 +57,7 @@ namespace Tests.XSX.Extension
         {
             var str = "ToMd5Test";
             var result1 = str.ToMd5();
-            var result2 = str.EncryptMD5();
+            var result2 = str.EncryptMd5();
             result1.ShouldBe(result2);
         }
     }
