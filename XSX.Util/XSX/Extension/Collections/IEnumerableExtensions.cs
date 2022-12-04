@@ -118,7 +118,8 @@ namespace XSX.Extension.Collections
         /// <typeparam name="T"></typeparam>
         /// <param name="arr"></param>
         /// <returns></returns>
-        public static IEnumerable<IEnumerable<T>> GetCombination<T>(this IEnumerable<T> arr)
+        [Obsolete]
+        public static IEnumerable<IEnumerable<T>> GetCombination1<T>(this IEnumerable<T> arr)
         {
             List<List<T>> list = new List<List<T>>();
             foreach (var s in arr)
@@ -132,6 +133,32 @@ namespace XSX.Extension.Collections
                 }
             }
             return list;
+        }
+
+        /// <summary>
+        /// 计算列表的全组合列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> GetCombination<T>(this IEnumerable<T> arr)
+        {
+            var list = arr.ToList();
+            int len = list.Count;
+            int n = 1 << len;
+            for (int i = 1; i < n; i++)    //从 1 循环到 2^len -1
+            {
+                var result = new List<T>();
+                for (int j = 0; j < len; j++)
+                {
+                    int temp = i;
+                    if ((temp & (1 << j)) != 0)   //对应位上为1，则输出对应的字符
+                    {
+                        result.Add(list[j]);
+                    }
+                }
+                yield return result;
+            }
         }
     }
 }
