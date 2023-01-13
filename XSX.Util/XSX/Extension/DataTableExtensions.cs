@@ -61,7 +61,7 @@ namespace XSX.Extension
             return Expression.Lambda<Func<DataRow, T>>(init, paramter).Compile();
         }
         /// <summary>
-        /// 合并两个表格列，行数按顺序对应
+        /// 合并两个表格列，行数按顺序对应，列顺序不保证与原来相同，请使用列名代替列序号访问合并后的数据
         /// </summary>
         /// <param name="table1">连接左表</param>
         /// <param name="table2">连接右表</param>
