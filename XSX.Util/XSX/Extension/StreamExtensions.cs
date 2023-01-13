@@ -18,7 +18,15 @@ namespace XSX.Extension
             stream.CopyTo(memoryStream);
             return memoryStream.ToArray();
         }
-
+        /// <summary>
+        /// byte数组转流
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static Stream ByteArrayToStream(this byte[] bytes)
+        {
+            return new MemoryStream(bytes);
+        }
 
     }
 }

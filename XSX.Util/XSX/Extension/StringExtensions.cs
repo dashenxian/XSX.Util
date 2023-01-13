@@ -342,7 +342,11 @@ namespace XSX.Extension
             Check.NotNull(value, nameof(value));
             return (T)Enum.Parse(typeof(T), value, ignoreCase);
         }
-
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static string ToMd5(this string str)
         {
             using var md5 = MD5.Create();
@@ -380,23 +384,36 @@ namespace XSX.Extension
             return (useCurrentCulture ? char.ToUpper(str[0]) : char.ToUpperInvariant(str[0])) + str.Substring(1);
         }
 
-
-        public static string EncryptMD5(this string input)
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string EncryptMd5(this string input)
         {
             using MD5CryptoServiceProvider cryptoServiceProvider = new MD5CryptoServiceProvider();
             return BitConverter.ToString(cryptoServiceProvider.ComputeHash(Encoding.UTF8.GetBytes(input))).Replace("-", string.Empty);
         }
-
-        public static string EncryptShortMD5(this string input)
+        /// <summary>
+        /// 取MD5的后16位
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string EncryptShortMd5(this string input)
         {
-            return input.EncryptMD5().Substring(8, 16);
+            return input.EncryptMd5().Substring(8, 16);
         }
-
-        public static bool ValidateMD5(this string input, string encryptedValue)
+        /// <summary>
+        /// 验证MD5加密
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="encryptedValue"></param>
+        /// <returns></returns>
+        public static bool ValidateMd5(this string input, string encryptedValue)
         {
             if (string.IsNullOrEmpty(input))
                 return false;
-            return encryptedValue.Length == 16 ? input.EncryptShortMD5().Equals(encryptedValue) : input.EncryptMD5().Equals(encryptedValue);
+            return encryptedValue.Length == 16 ? input.EncryptShortMd5().Equals(encryptedValue) : input.EncryptMd5().Equals(encryptedValue);
         }
 
         /// <summary>
@@ -423,6 +440,25 @@ namespace XSX.Extension
                 6 => Regex.Replace(s, "(.{1}).*(.{1})", $"$1{masks}$2"),
                 _ => Regex.Replace(s, "(.{1}).*", $"$1{masks}")
             };
+        }
+
+        /// <summary>
+        /// base64转字节数组
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static byte[] Base64ToByteArray(this string s)
+        {
+            return Convert.FromBase64String(s);
+        }
+        /// <summary>
+        /// 字节数组转base64字符
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ByteArrayToBase64(this byte[] bytes)
+        {
+            return Convert.ToBase64String(bytes);
         }
     }
 }
