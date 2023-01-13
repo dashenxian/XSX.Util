@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
@@ -41,7 +42,7 @@ namespace XSX.Extension
         /// <typeparam name="T"></typeparam>
         /// <param name="dataRow"></param>
         /// <returns></returns>
-        public static Func<DataRow, T> ToExpression<T>(DataRow dataRow) where T : class, new()
+        private static Func<DataRow, T> ToExpression<T>(DataRow dataRow) where T : class, new()
         {
             if (dataRow == null) throw new ArgumentNullException("dataRow", "当前对象为null 无法转换成实体");
             ParameterExpression paramter = Expression.Parameter(typeof(DataRow), "dr");
@@ -58,6 +59,57 @@ namespace XSX.Extension
             }
             MemberInitExpression init = Expression.MemberInit(Expression.New(typeof(T)), binds.ToArray());
             return Expression.Lambda<Func<DataRow, T>>(init, paramter).Compile();
+        }
+        /// <summary>
+        /// 合并两个表格列，行数按顺序对应
+        /// </summary>
+        /// <param name="table1">连接左表</param>
+        /// <param name="table2">连接右表</param>
+        /// <returns>连接后的表</returns>
+        public static DataTable Join(this DataTable table1, DataTable table2)
+        {
+            if (table1 == null && table2 == null)
+            {
+                return new DataTable();
+            }
+            if (table1 == null || table1.Columns.Count == 0)
+            {
+                return table2.Copy();
+            }
+            if (table2 == null || table2.Columns.Count == 0)
+            {
+                return table1.Copy();
+            }
+
+            var tableLeft = table1;
+            var tableRight = table2;
+            if (tableLeft.Rows.Count == 0)
+            {
+                tableLeft = table2;
+                tableRight = table1;
+            }
+            var leftJoin =
+                (from t1 in tableLeft.AsEnumerable().Select((row, index) => new { Row = row, Index = index })
+                 join t2 in tableRight.AsEnumerable().Select((row, index) => new { Row = row, Index = index })
+                     on t1.Index equals t2.Index into t2Group
+                 from t2 in t2Group.DefaultIfEmpty()
+                 select t1.Row.ItemArray.Concat(t2 == null ? Enumerable.Repeat(DBNull.Value, tableRight.Columns.Count) : t2.Row.ItemArray).ToArray()).ToList();
+
+            var result = new DataTable();
+            foreach (DataColumn col in tableLeft.Columns)
+            {
+                result.Columns.Add(col.ColumnName, col.DataType);
+            }
+            foreach (DataColumn col in tableRight.Columns)
+            {
+                result.Columns.Add(col.ColumnName, col.DataType);
+            }
+            foreach (var row in leftJoin)
+            {
+                result.Rows.Add(row);
+            }
+
+            return result;
         }
     }
 
