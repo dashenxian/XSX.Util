@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -459,6 +460,30 @@ namespace XSX.Extension
         public static string ByteArrayToBase64(this byte[] bytes)
         {
             return Convert.ToBase64String(bytes);
+        }
+        /// <summary>
+        /// 替换不合法的文件名字符
+        /// </summary>
+        /// <param name="fileName">文件名，不含目录</param>
+        /// <param name="replacement">替换的字符</param>
+        /// <returns></returns>
+        public static string MakeValidFileName(this string fileName, string replacement = "_")
+        {
+            var str = new StringBuilder();
+            var invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
+            foreach (var c in fileName)
+            {
+                if (invalidFileNameChars.Contains(c))
+                {
+                    str.Append(replacement ?? "");
+                }
+                else
+                {
+                    str.Append(c);
+                }
+            }
+
+            return str.ToString();
         }
     }
 }

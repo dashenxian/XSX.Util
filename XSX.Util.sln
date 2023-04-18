@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29905.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{58E4F7E4-A392-4FB1-B422-494C045AAC0C}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSX.Util.Tests", "XSX.Util.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSX.Util.TestBase", "XSX.Util.TestBase\XSX.Util.TestBase.csproj", "{F2888EFA-1F84-4333-A242-A79DD30B39BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSX.Util", "XSX.Util\XSX.Util.csproj", "{29C826DD-F3B4-4FAF-A0E4-6FA38A73A7C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSX.Util", "XSX.Util\XSX.Util.csproj", "{29C826DD-F3B4-4FAF-A0E4-6FA38A73A7C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSX.Util.PerformanceTest", "XSX.Util.PerformanceTest\XSX.Util.PerformanceTest.csproj", "{CE8207B3-92ED-48D6-B51F-9865104F193A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{29C826DD-F3B4-4FAF-A0E4-6FA38A73A7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29C826DD-F3B4-4FAF-A0E4-6FA38A73A7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29C826DD-F3B4-4FAF-A0E4-6FA38A73A7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE8207B3-92ED-48D6-B51F-9865104F193A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE8207B3-92ED-48D6-B51F-9865104F193A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE8207B3-92ED-48D6-B51F-9865104F193A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE8207B3-92ED-48D6-B51F-9865104F193A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{DFE70996-93DF-44F3-BC66-DEAFF5E206A5} = {57A3A69F-6A89-4975-A48B-706571E1D511}
 		{F2888EFA-1F84-4333-A242-A79DD30B39BF} = {57A3A69F-6A89-4975-A48B-706571E1D511}
 		{29C826DD-F3B4-4FAF-A0E4-6FA38A73A7C2} = {58E4F7E4-A392-4FB1-B422-494C045AAC0C}
+		{CE8207B3-92ED-48D6-B51F-9865104F193A} = {57A3A69F-6A89-4975-A48B-706571E1D511}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4730C1BC-F791-4D20-83BA-6E3BC97433B7}
