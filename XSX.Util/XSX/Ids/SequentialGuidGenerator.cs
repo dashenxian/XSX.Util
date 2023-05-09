@@ -18,7 +18,10 @@ namespace XSX.Guids
         public SequentialGuidGeneratorOptions Options { get; }
 
         private static readonly RandomNumberGenerator RandomNumberGenerator = RandomNumberGenerator.Create();
-
+        public SequentialGuidGenerator(SequentialGuidGeneratorOptions options)
+        {
+            Options = options;
+        }
         public SequentialGuidGenerator(IOptions<SequentialGuidGeneratorOptions> options)
         {
             Options = options.Value;
