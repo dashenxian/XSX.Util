@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace XSX.Extension.Collections
 {
@@ -158,6 +159,21 @@ namespace XSX.Extension.Collections
                     }
                 }
                 yield return result;
+            }
+        }
+        /// <summary>
+        /// 把列表拆分成多个指定长度的列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">原列表</param>
+        /// <param name="size">拆分后列表最大长度</param>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int size)
+        {
+            while (source != null && source.Any())
+            {
+                yield return source.Take(size);
+                source = source.Skip(size);
             }
         }
     }
