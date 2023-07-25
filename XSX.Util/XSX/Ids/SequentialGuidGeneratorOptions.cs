@@ -13,7 +13,7 @@ namespace XSX.Guids
 
         public SequentialGuidGeneratorOptions()
         {
-            DefaultSequentialGuidType = SequentialGuidType.SequentialAtEnd;
+            DefaultSequentialGuidType = SequentialGuidType.SequentialAsString;
         }
     }
 }
