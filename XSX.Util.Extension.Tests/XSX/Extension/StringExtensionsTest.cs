@@ -60,5 +60,41 @@ namespace Tests.XSX.Extension
             var result2 = str.EncryptMd5();
             result1.ShouldBe(result2);
         }
+        [Fact]
+        public void GetStrEndNumberAndStrHaveNumTest()
+        {
+            var str = "ToMd5Test123";
+            (string nonNumericPart, int numericValue) = str.GetStrEndNumberAndStr();
+
+            nonNumericPart.ShouldBe("ToMd5Test");
+            numericValue.ShouldBe(123);
+        }
+        [Fact]
+        public void GetStrEndNumberAndStrHaveNonNumTest()
+        {
+            var str = "ToMd5Test";
+            (string nonNumericPart, int numericValue) = str.GetStrEndNumberAndStr();
+
+            nonNumericPart.ShouldBe("ToMd5Test");
+            numericValue.ShouldBe(1);
+        }
+        [Fact]
+        public void GetStrEndNumberAndStrHaveNonStrTest()
+        {
+            var str = "123";
+            (string nonNumericPart, int numericValue) = str.GetStrEndNumberAndStr();
+
+            nonNumericPart.ShouldBe("");
+            numericValue.ShouldBe(123);
+        }
+        [Fact]
+        public void GetStrEndNumberAndStrNonTest()
+        {
+            var str = "";
+            (string nonNumericPart, int numericValue) = str.GetStrEndNumberAndStr();
+
+            nonNumericPart.ShouldBe("");
+            numericValue.ShouldBe(1);
+        }
     }
 }

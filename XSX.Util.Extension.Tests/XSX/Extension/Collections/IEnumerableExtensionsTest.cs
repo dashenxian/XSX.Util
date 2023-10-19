@@ -58,6 +58,14 @@ namespace Tests.XSX.Extension.Collections
             && ls.Any(t => t == students[2])).Count().ShouldBe(1);
         }
 
+        [Fact]
+        public void GetStrEndMaxNumberTest()
+        {
+            var list = new List<string> { "a1", "a2", "a123", "abc144", "ded2", "avc" };
+
+            string maxNumericString = list.GetStrEndMaxNumber();
+            maxNumericString.ShouldBe("abc144");
+        }
         class Student
         {
             public string Name { get; set; }

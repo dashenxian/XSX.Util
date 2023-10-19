@@ -485,5 +485,26 @@ namespace XSX.Extension
 
             return str.ToString();
         }
+        /// <summary>
+        /// 把字符串分成两部分，前面的字符串和结尾的数字，一般用于计算下一个编号
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="defaultNum">如果字符串不以数字结尾时返回的默认值</param>
+        /// <returns></returns>
+        public static (string nonNumericPart, int numericValue) GetStrEndNumberAndStr(this string str, int defaultNum = 1)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return ("", defaultNum);
+            }
+            var maxNumericString = str;
+            string numericPart = Regex.Match(maxNumericString, @"\d+$").Value; // 提取结尾的数字部分
+            string nonNumericPart = maxNumericString.Substring(0, maxNumericString.Length - numericPart.Length); // 提取除数字外的字符部分
+            if (!int.TryParse(numericPart, out var numericValue))   // 将数字部分转换为 int 类型
+            {
+                numericValue = 1;
+            }
+            return (nonNumericPart, numericValue);
+        }
     }
 }

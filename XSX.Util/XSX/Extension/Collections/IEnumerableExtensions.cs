@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
 namespace XSX.Extension.Collections
@@ -175,6 +176,23 @@ namespace XSX.Extension.Collections
                 yield return source.Take(size);
                 source = source.Skip(size);
             }
+        }
+        /// <summary>
+        /// 返回列表中末尾数字最大的字符串，如果都没有以数字结尾，则返回列表第一个字符串，如果列表为空则返回空字符串
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static string GetStrEndMaxNumber(this IEnumerable<string> list)
+        {
+            if (list == null || !list.Any())
+            {
+                return "";
+            }
+            string maxNumericString = list
+                .Where(str => Regex.IsMatch(str, @"\d+$")) // 过滤结尾为数字的字符串
+                .OrderByDescending(str => int.Parse(Regex.Match(str, @"\d+$").Value)) // 按数字进行降序排序
+                .FirstOrDefault(); // 获取第一个（最大）字符串，如果没有满足条件的则返回 null
+            return maxNumericString;
         }
     }
 }
