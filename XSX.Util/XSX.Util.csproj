@@ -16,6 +16,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
+		<PackageReference Include="MathNet.Numerics" Version="5.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Nito.AsyncEx" Version="5.1.0" />
