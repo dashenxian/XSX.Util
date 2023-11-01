@@ -154,7 +154,7 @@ namespace XSX.Util
         {
             Transformation = transformation;
             M = Matrix<double>.Build;
-            this.ScaleAndRoate = M.Dense(1, 7, new double[]
+            this.ScaleAndRoate = M.Dense(7, 1, new double[]
             {
                 Transformation.DeltaX,
                 Transformation.DeltaY,
@@ -163,7 +163,7 @@ namespace XSX.Util
                 Transformation.ThetaY,
                 Transformation.ThetaZ,
                 Transformation.Scale
-            }).Transpose();
+            });
         }
         /// <summary>
         /// 坐标转换
