@@ -9,6 +9,10 @@ namespace XSX.Util
     public class EnuTransform
     {
         /// <summary>
+        /// 误差精度
+        /// </summary>
+        const double epsilon = 0.000000000000001;
+        /// <summary>
         /// 圆周率
         /// </summary>
         const double Pi = Math.PI;
@@ -40,15 +44,19 @@ namespace XSX.Util
         /// </summary>
         public Matrix<double> World2LocalMatrix { get; private set; }
         /// <summary>
+        /// ENU转ECEF转换矩阵
+        /// </summary>
+        public Matrix<double> Local2WorldMatrix { get; private set; }
+        /// <summary>
         /// 初始化转换类
         /// </summary>
-        /// <param name="enuCenterL">经度</param>
-        /// <param name="enuCenterB">纬度</param>
-        /// <param name="enuCenterH">高程</param>
+        /// <param name="enuCenterL">站心经度</param>
+        /// <param name="enuCenterB">站心纬度</param>
+        /// <param name="enuCenterH">站心高程</param>
         public EnuTransform(double enuCenterL, double enuCenterB, double enuCenterH)
         {
-
             World2LocalMatrix = CalEcef2Enu(enuCenterL, enuCenterB, enuCenterH);
+            Local2WorldMatrix = World2LocalMatrix.Inverse();
         }
         /// <summary>
         /// 经纬度转为enu坐标
@@ -77,6 +85,38 @@ namespace XSX.Util
             return (enu[0], enu[1], enu[2]);
         }
         /// <summary>
+        /// ENU转为经纬度
+        /// </summary>
+        /// <param name="x">X</param>
+        /// <param name="y">Y</param>
+        /// <param name="z">Z</param>
+        /// <returns></returns>
+        public (double L, double B, double H) TransToBLH(double x, double y, double z)
+        {
+            return TransToBLH(x, y, z, Local2WorldMatrix);
+        }
+        /// <summary>
+        /// ENU转为经纬度
+        /// </summary>
+        /// <param name="x">X</param>
+        /// <param name="y">Y</param>
+        /// <param name="z">Z</param>
+        /// <param name="local2WorldMatrix">ECEF转ENU转换矩阵</param>
+        /// <returns></returns>
+        private static (double L, double B, double H) TransToBLH(double x, double y, double z, Matrix<double> local2WorldMatrix)
+        {
+            //(var x1, var y1, var z1) = Xyz2Blh(x, y, z);
+            //var xyz = V.DenseOfArray(new double[] { -x1, -y1, -z1, 1 });
+            //var enu = xyz * local2WorldMatrix;
+            //return (enu[0], enu[1], enu[2]);
+
+            var xyz = V.DenseOfArray(new double[] { x, y, z, 1 });
+            var ecef = local2WorldMatrix * xyz;
+            (var x1, var y1, var z1) = Xyz2Blh(ecef[0], ecef[1], ecef[2]);
+
+            return (x1, y1, z1);
+        }
+        /// <summary>
         /// 经纬度转ECEF坐标
         /// </summary>
         /// <param name="l">经度</param>
@@ -98,9 +138,9 @@ namespace XSX.Util
         /// <summary>
         /// 计算ECEF转ENU坐标矩阵
         /// </summary>
-        /// <param name="enuCenterL">经度</param>
-        /// <param name="enuCenterB">纬度</param>
-        /// <param name="enuCenterH">高程</param>
+        /// <param name="enuCenterL">站心经度</param>
+        /// <param name="enuCenterB">站心纬度</param>
+        /// <param name="enuCenterH">站心高程</param>
         /// <returns></returns>
         private static Matrix<double> CalEcef2Enu(double enuCenterL, double enuCenterB, double enuCenterH)
         {
@@ -156,5 +196,69 @@ namespace XSX.Util
 
             return rotation;
         }
+        /// <summary>
+        /// 经ENU转ECEF坐标
+        /// </summary>
+        /// <param name="x">x</param>
+        /// <param name="y">y</param>
+        /// <param name="z">z</param>
+        /// <returns></returns>
+        private static (double l, double b, double h) Xyz2Blh(double x, double y, double z)
+        {
+            double tmpX = x;
+            double temY = y;
+            double temZ = z;
+
+            double curB = 0;
+            double N = 0;
+            double calB = Math.Atan2(temZ, Math.Sqrt(tmpX * tmpX + temY * temY));
+
+            int counter = 0;
+            while (Math.Abs(curB - calB) * R2D > epsilon && counter < 25)
+            {
+                curB = calB;
+                N = a / Math.Sqrt(1 - e * e * Math.Sin(curB) * Math.Sin(curB));
+                calB = Math.Atan2(temZ + N * e * e * Math.Sin(curB), Math.Sqrt(tmpX * tmpX + temY * temY));
+                counter++;
+            }
+
+            x = Math.Atan2(temY, tmpX) * R2D;
+            y = curB * R2D;
+            z = temZ / Math.Sin(curB) - N * (1 - e * e);
+            return (x, y, z);
+        }
+        /// <summary>
+        /// 计算ENU转ECEF坐标矩阵
+        /// </summary>
+        /// <param name="enuCenterL">站心经度</param>
+        /// <param name="enuCenterB">站心纬度</param>
+        /// <param name="enuCenterH">站心高程</param>
+        /// <returns></returns>
+        private static Matrix<double> CalEnu2Ecef(double enuCenterL, double enuCenterB, double enuCenterH)
+        {
+            var topocentricOrigin = V.DenseOfArray(new double[] { enuCenterL, enuCenterB, enuCenterH });
+            double rzAngle = topocentricOrigin[0] * D2R + Pi / 2;
+            Matrix<double> rZ = CreateRotationMatrix(rzAngle, V.DenseOfArray(new double[] { 0, 0, 1 }));
+
+
+            double rxAngle = (Pi / 2 - topocentricOrigin[1] * D2R);
+            Matrix<double> rX = CreateRotationMatrix(rxAngle, V.DenseOfArray(new double[] { 1, 0, 0 }));
+
+            Matrix<double> rotation = DenseMatrix.CreateIdentity(4);
+            rotation.SetSubMatrix(0, 0, rX * rZ);
+            //cout << rotation << endl;
+
+            double tx = topocentricOrigin[0];
+            double ty = topocentricOrigin[1];
+            double tz = topocentricOrigin[2];
+            (tx, ty, tz) = Blh2Xyz(tx, ty, tz);
+
+            Matrix<double> translation = DenseMatrix.CreateIdentity(4);
+            translation.SetColumn(3, V.DenseOfArray(new double[] { tx, ty, tz, 1 }));
+
+            var resultMat = rotation * translation;
+            return resultMat;
+        }
+
     }
 }

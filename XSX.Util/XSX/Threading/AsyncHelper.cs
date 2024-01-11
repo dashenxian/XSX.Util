@@ -22,7 +22,42 @@ namespace XSX.Threading
             return method.ReturnType == typeof(Task) ||
                    (method.ReturnType.GetTypeInfo().IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>));
         }
-
+        /// <summary>
+        /// 判断类型是否为Task或Task`T`
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsTaskOrTaskOfT(this Type type)
+        {
+            if (type == typeof(Task))
+            {
+                return true;
+            }
+            return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>);
+        }
+        /// <summary>
+        /// 判断类型是否为Task`T`
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsTaskOfT(this Type type)
+        {
+            return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>);
+        }
+        /// <summary>
+        /// 获取Task包装里的类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static Type UnwrapTask(Type type)
+        {
+            Check.NotNull<Type>(type, nameof(type));
+            if (type == typeof(Task))
+            {
+                return typeof(void);
+            }
+            return type.IsTaskOfT() ? type.GenericTypeArguments[0] : type;
+        }
         /// <summary>
         /// 同步运行异步方法。
         /// </summary>
