@@ -506,5 +506,34 @@ namespace XSX.Extension
             }
             return (nonNumericPart, numericValue);
         }
+        /// <summary>
+        /// byte数组转为hex字符串
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ByteArrayToHexString(byte[] bytes)
+        {
+            StringBuilder sb = new StringBuilder(bytes.Length * 2);
+            foreach (byte b in bytes)
+            {
+                sb.Append(b.ToString("X2"));
+            }
+            return sb.ToString();
+        }
+        /// <summary>
+        /// hex字符串转为byte数组
+        /// </summary>
+        /// <param name="hexString"></param>
+        /// <returns></returns>
+        public static byte[] HexStringToByteArray(string hexString)
+        {
+            int length = hexString.Length / 2;
+            byte[] bytes = new byte[length];
+            for (int i = 0; i < length; i++)
+            {
+                bytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            }
+            return bytes;
+        }
     }
 }
