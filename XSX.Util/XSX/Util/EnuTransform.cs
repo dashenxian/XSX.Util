@@ -14,6 +14,7 @@ namespace XSX.Util
     {
         /*
          * Cesium坐标转换
+         * https://www.cnblogs.com/matanzhang/p/11846929.html
          * 1.转地心地固坐标（ECEF）
            var center = Cesium.Cartesian3.fromDegrees(longitude, latitude, height)；//其中，高度默认值为0，可以不用填写；longitude和latitude为角度           
            var positions = Cesium.Cartesian3.fromDegreesArray(coordinates);//其中，coordinates格式为不带高度的数组。例如：[-115.0, 37.0, -107.0, 33.0]           
@@ -24,6 +25,11 @@ namespace XSX.Util
            var inv = Cesium.Matrix4.inverseTransformation(transform, new Cesium.Matrix4());
            //local为 ENU坐标, point为 ECEF坐标
            var local = Cesium.Matrix4.multiplyByPoint(inv, point, new Cesium.Cartesian3());
+         * 3.地心地固坐标（ECEF）转wgs84
+           Cesium.Cartographic.fromCartesian(new Cesium.Cartesian3(x,y,x))
+         * 4.弧度转经纬度
+           var radians=Cesium.Math.toRadians（degrees）;//经纬度转弧度
+           var degrees=Cesium.Math.toDegrees（radians）;//弧度转经纬度
          */
         /// 
         /// <summary>
