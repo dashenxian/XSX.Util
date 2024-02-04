@@ -6,8 +6,26 @@ using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace XSX.Util
 {
+    /// <summary>
+    /// ENU坐标转换
+
+    /// </summary>
     public class EnuTransform
     {
+        /*
+         * Cesium坐标转换
+         * 1.转地心地固坐标（ECEF）
+           var center = Cesium.Cartesian3.fromDegrees(longitude, latitude, height)；//其中，高度默认值为0，可以不用填写；longitude和latitude为角度           
+           var positions = Cesium.Cartesian3.fromDegreesArray(coordinates);//其中，coordinates格式为不带高度的数组。例如：[-115.0, 37.0, -107.0, 33.0]           
+           var positions = Cesium.Cartesian3.fromDegreesArrayHeights(coordinates);//coordinates格式为带有高度的数组。例如：[-115.0, 37.0, 100000.0, -107.0, 33.0, 150000.0]
+         * 2.地心地固坐标（ECEF）转东北天坐标（ENU）
+           //center为东北天坐标系的原点，center的坐标系统为ECEF
+           var transform = Cesium.Transforms.eastNorthUpToFixedFrame(center); //transform为转换矩阵，与EnuTransform.Local2WorldMatrix一致
+           var inv = Cesium.Matrix4.inverseTransformation(transform, new Cesium.Matrix4());
+           //local为 ENU坐标, point为 ECEF坐标
+           var local = Cesium.Matrix4.multiplyByPoint(inv, point, new Cesium.Cartesian3());
+         */
+        /// 
         /// <summary>
         /// 误差精度
         /// </summary>
