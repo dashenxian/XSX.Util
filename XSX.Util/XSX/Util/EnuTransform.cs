@@ -35,7 +35,7 @@ namespace XSX.Util
         /// <summary>
         /// 误差精度
         /// </summary>
-        const double epsilon = 0.000000000000001;
+        const double Epsilon = 0.000000000000001;
         /// <summary>
         /// 圆周率
         /// </summary>
@@ -238,7 +238,7 @@ namespace XSX.Util
             double calB = Math.Atan2(temZ, Math.Sqrt(tmpX * tmpX + temY * temY));
 
             int counter = 0;
-            while (Math.Abs(curB - calB) * R2D > epsilon && counter < 25)
+            while (Math.Abs(curB - calB) * R2D > Epsilon && counter < 25)
             {
                 curB = calB;
                 N = a / Math.Sqrt(1 - e * e * Math.Sin(curB) * Math.Sin(curB));
