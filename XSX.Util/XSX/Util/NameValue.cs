@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XSX.Util
+﻿namespace XSX.Util
 {
     /// <summary>
     /// Can be used to store Name/Value (or Key/Value) pairs.
@@ -22,7 +18,7 @@ namespace XSX.Util
         public NameValue(string name, string value) : base(name, value)
         {
         }
-    }   
+    }
     /// <summary>
     /// Can be used to store Name/Value (or Key/Value) pairs.
     /// </summary>

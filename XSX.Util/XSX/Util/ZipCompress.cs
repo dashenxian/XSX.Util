@@ -1,9 +1,9 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿using ICSharpCode.SharpZipLib.Checksum;
+using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ICSharpCode.SharpZipLib.Checksum;
 using XSX.Extension;
 
 namespace XSX.Util
@@ -234,7 +234,7 @@ namespace XSX.Util
                         crc.Update(buffer);
                         fs.Close();
 
-                        string tempFile = Path.GetRelativePath(staticFile,file);
+                        string tempFile = Path.GetRelativePath(staticFile, file);
                         ZipEntry entry = new ZipEntry(tempFile)
                         {
                             IsUnicodeText = true,

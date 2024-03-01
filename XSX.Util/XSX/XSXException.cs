@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace XSX
 {
-    public class XSXException:Exception
+    public class XSXException : Exception
     {
         /// <summary>
         /// Creates a new <see cref="XSXException"/> object.

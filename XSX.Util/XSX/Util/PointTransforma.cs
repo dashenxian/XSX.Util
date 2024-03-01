@@ -1,9 +1,8 @@
-﻿using System;
+﻿using MathNet.Numerics.LinearAlgebra;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Double;
+using XSX.Models;
 
 namespace XSX.Util
 {
@@ -50,7 +49,7 @@ namespace XSX.Util
         public Point Transform(Point p)
         {
             var target = Delta + ScaleAndRoate * V.Dense(new double[] { p.X, p.Y });
-            return new Point() { X = target[0], Y = target[1] };
+            return new Point(target[0], target[1]);
         }
         /// <summary>
         /// 坐标转换
@@ -114,20 +113,6 @@ namespace XSX.Util
             this.Scale = Math.Sqrt(Math.Pow(a + 1, 2) + Math.Pow(b, 2));
             this.Theta = Math.Atan(b / (a + 1));
         }
-    }
-    public class Point
-    {
-        public Point()
-        {
-
-        }
-        public Point(double x, double y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-        public double X { get; set; }
-        public double Y { get; set; }
     }
     /// <summary>
     /// 布尔莎七参数坐标转换

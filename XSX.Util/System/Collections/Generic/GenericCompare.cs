@@ -4,7 +4,7 @@
     /// 比较器，自定义Distinct比较器
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericCompare<T> : IEqualityComparer<T> 
+    public class GenericCompare<T> : IEqualityComparer<T>
     {
         private Func<T, T, bool> Expr { get; set; }
         public GenericCompare(Func<T, T, bool> expr)

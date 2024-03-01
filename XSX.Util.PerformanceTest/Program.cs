@@ -1,7 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace XSX.Util.PerformanceTest

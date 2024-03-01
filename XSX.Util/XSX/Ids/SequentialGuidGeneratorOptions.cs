@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XSX.Guids
+﻿namespace XSX.Guids
 {
     public class SequentialGuidGeneratorOptions
     {

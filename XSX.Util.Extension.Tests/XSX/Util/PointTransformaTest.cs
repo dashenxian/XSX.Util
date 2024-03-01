@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Shouldly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Shouldly;
+using XSX.Models;
 using XSX.Util;
 using Xunit;
 
@@ -20,7 +20,7 @@ namespace Tests.XSX.Util
                 { new Point(653068.7127, 3281704.0923), new Point(651796.2895, 3281825.0074) },
                 { new Point(653178.5482, 3281675.9410), new Point(651904.7691, 3281857.9999) }
             };
-            
+
             var transformaParam = new TransformationParamFour(standardPoints);
             var pointTransforma = new PointTransformFour(transformaParam);
             var targetPoint = pointTransforma.Transform(new Point(653122.0487, 3281691.3951));
@@ -63,7 +63,7 @@ namespace Tests.XSX.Util
             Math.Abs(expectTargetPoint.X - targetPoint.X).ShouldBeLessThan(0.0349);
             Math.Abs(expectTargetPoint.Y - targetPoint.Y).ShouldBeLessThan(0.0349);
             Math.Abs(expectTargetPoint.Z - targetPoint.Z).ShouldBeLessThan(0.0349);
-            Math.Abs(transformaParam.Sigma- 0.0349).ShouldBeLessThan(0.001);
+            Math.Abs(transformaParam.Sigma - 0.0349).ShouldBeLessThan(0.001);
         }
         [Fact]
         public void TransformaSevenSigmaTest()
@@ -79,7 +79,7 @@ namespace Tests.XSX.Util
             };
 
             var transformaParam = new TransformationParamSeven(standardPoints);
-            var sourcePoints=new List<Point3D>()
+            var sourcePoints = new List<Point3D>()
             {
                 new Point3D(-1.9545e+06,4.4903e+06,4.0742e+06),
                 new Point3D(-1.9520e+06,4.4853e+06,4.0811e+06),

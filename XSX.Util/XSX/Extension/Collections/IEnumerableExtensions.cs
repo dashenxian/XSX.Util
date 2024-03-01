@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using JetBrains.Annotations;
 
 namespace XSX.Extension.Collections
 {

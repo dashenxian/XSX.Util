@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Shouldly;
+﻿using Shouldly;
 using XSX.Helper;
 using Xunit;
 
@@ -12,7 +9,7 @@ namespace Tests.XSX.Helper
         [Fact]
         public void IsServiceExistedTest()
         {
-            var serviceName= "Themes";
+            var serviceName = "Themes";
             ServiceHelper.IsServiceExisted(serviceName).ShouldBe(true);
         }
     }

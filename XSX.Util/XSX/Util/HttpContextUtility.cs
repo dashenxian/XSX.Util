@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
-using Microsoft.AspNetCore.Http;
 
 namespace XSX.Util
 {

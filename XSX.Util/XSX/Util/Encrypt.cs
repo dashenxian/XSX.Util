@@ -60,7 +60,7 @@ namespace XSX.Util
         /// <param name="strText">被解密的字符串</param> 
         /// <param name="strEncrKey">密钥</param> 
         /// <returns>解密后的数据</returns> 
-        public static string DesEncrypt(this string strText, string strEncrKey,string iv)
+        public static string DesEncrypt(this string strText, string strEncrKey, string iv)
         {
             if (strEncrKey.Length < 8)
             {
@@ -234,7 +234,7 @@ namespace XSX.Util
         /// <param name="encryptString">待加密字符串</param>
         /// <param name="encryptKey">加密密钥，须半角字符</param>
         /// <returns>加密结果字符串</returns>
-        public static string AESEncrypt(this string encryptString, string encryptKey,string iv)
+        public static string AESEncrypt(this string encryptString, string encryptKey, string iv)
         {
             //encryptKey = GetSubString(encryptKey, 32, "");
             //encryptKey = encryptKey.PadRight(32, ' ');
@@ -292,7 +292,7 @@ namespace XSX.Util
         /// <param name="decryptString">待解密的字符串</param>
         /// <param name="decryptKey">解密密钥,和加密密钥相同</param>
         /// <returns>解密成功返回解密后的字符串,失败返回空</returns>
-        public static string AESDecrypt(this string decryptString, string decryptKey,string iv)
+        public static string AESDecrypt(this string decryptString, string decryptKey, string iv)
         {
             try
             {
@@ -418,7 +418,7 @@ namespace XSX.Util
         /// <param name="fs">需要加密的文件流</param>
         /// <param name="decryptKey">加密密钥</param>
         /// <returns>加密流</returns>
-        public static CryptoStream AESEncryptStrream(this FileStream fs, string decryptKey,string iv)
+        public static CryptoStream AESEncryptStrream(this FileStream fs, string decryptKey, string iv)
         {
             decryptKey = GetSubString(decryptKey, 32, "");
             decryptKey = decryptKey.PadRight(32, ' ');
@@ -442,7 +442,7 @@ namespace XSX.Util
         public static CryptoStream AESDecryptStream(this FileStream fs, string decryptKey, string iv)
         {
             decryptKey = GetSubString(decryptKey, 32, "");
-            decryptKey = decryptKey.PadRight(32, ' '); 
+            decryptKey = decryptKey.PadRight(32, ' ');
             iv = GetSubString(iv, 32, "");
             iv = iv.PadRight(32, ' ');
             var rijndaelProvider = new RijndaelManaged()
@@ -463,7 +463,7 @@ namespace XSX.Util
         {
             using (FileStream fren = new FileStream(outputPath, FileMode.Create))
             {
-                CryptoStream enfr = AESEncryptStrream(fren, Default_AES_Key,Default_AES_Iv);
+                CryptoStream enfr = AESEncryptStrream(fren, Default_AES_Key, Default_AES_Iv);
                 byte[] bytearrayinput = new byte[input.Length];
                 input.Read(bytearrayinput, 0, bytearrayinput.Length);
                 enfr.Write(bytearrayinput, 0, bytearrayinput.Length);

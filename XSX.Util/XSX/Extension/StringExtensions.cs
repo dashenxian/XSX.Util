@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using JetBrains.Annotations;
 using XSX.Extension.Collections;
 
 namespace XSX.Extension

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Shouldly;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Shouldly;
+using XSX.Models;
 using XSX.Util;
 using Xunit;
 
@@ -30,5 +28,24 @@ namespace Tests.XSX.Util
             result.ShouldBe(expectResult);
         }
 
+        [Fact]
+        public void ComputeConvexHullTest()
+        {
+            var point = new List<Point>()
+            {
+                new Point(0, 0), 
+                new Point(8, 5), 
+                new Point(10, 10), 
+                new Point(12, 5),
+                new Point(10, 0),
+                new Point(8, 5),
+                new Point(20, 10),
+                new Point(0, 0)
+            };
+            var hull = GeometryUtility.ComputeConvexHull(point);
+            var shouldResult = new List<Point>()
+                { new Point(0, 0), new Point(10, 10), new Point(20, 10), new Point(10, 0), new Point(0, 0) };
+            hull.ShouldBe(shouldResult);
+        }
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Shouldly;
+using System;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using Shouldly;
 using XSX.Extension;
 using Xunit;
 using Xunit.Abstractions;

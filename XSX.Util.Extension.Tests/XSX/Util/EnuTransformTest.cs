@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Shouldly;
+﻿using Shouldly;
+using System;
 using XSX.Util;
 using Xunit;
 

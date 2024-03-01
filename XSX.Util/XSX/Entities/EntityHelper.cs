@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System;
 using System.Reflection;
-using System.Text;
-using JetBrains.Annotations;
 using XSX.Util.XSX.Helper;
 
 namespace XSX.Entities
